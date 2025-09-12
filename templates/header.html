@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/fruit.css">
+      <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/home.css">
+  <link rel="stylesheet" href="/static/css/checkout.css">
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+    <title>Fruit Store</title>
+    <style>
+   
+      
+     /* Logo Container */
+     .logo {
+      display: flex;
+      justify-content: center; /* Center the logo */
+      align-items: center;
+      margin: 20px auto; /* Adds spacing around the logo */
+      padding: 10px;
+      background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Soft gradient background */
+      border-radius: 15px; /* Smooth rounded corners */
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); /* Elegant shadow */
+      max-width: 450px; /* Ensures responsiveness */
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Logo Image */
+    .logo img {
+      width: 100%; /* Makes it responsive */
+      height: auto;
+      border-radius: 10px; /* Adds a slight curve to the edges */
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Hover Effect */
+    .logo:hover {
+      transform: scale(1.05); /* Slight zoom effect */
+    }
+
+    /* Dropdown Menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  list-style: none;
+  padding: 10px 0;
+  min-width: 150px;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  transition: 0.3s ease-in-out;
+}
+
+.dropdown-menu li a:hover {
+  background: #f1f1f1;
+  color: #589872; /* Nice hover effect */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+/* Admin Icon Styles */
+.admin-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Stylish gradient */
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.admin-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+    </style>
+</head>
+<body>
+       
+    
+    
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+
+
+    <div class="nav-wrapper">
+      <div class="container">
+
+        <div class="logo">
+          <img src="/static/images/logo.png" alt="Logo" style="width: 400px; height: auto;">
+        </div>
+
+        <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+          <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <ul class="navbar-list">
+
+            <li>
+              <a href="{% url 'home' %}" class="navbar-link">Home</a>
+            </li>
+
+            <li>
+              <a href="{% url 'about' %}" class="navbar-link">About</a>
+            </li>
+
+            <li class="dropdown">
+              <a href="{% url 'shop' %}" class="navbar-link">Shop</a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'fruit' %}">Fruits</a></li>
+                <li><a href="{% url 'vegie-list' %}">Vegetables</a></li>
+                <li><a  href="{% url 'pulse_list' %}">Pulses</a></li>
+              </ul>
+            </li>
+
+
+            <li>
+              <a href="{% url 'blog_list' %}" class="navbar-link">Blog</a>
+            </li>
+
+            <li>
+              <a href="{% url 'contact' %}" class="navbar-link">Contact</a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <div class="header-action">
+
+          <div class="search-wrapper" data-search-wrapper>
+
+            <button class="header-action-btn" aria-label="Toggle search" data-search-btn>
+              <ion-icon name="search-outline" class="search-icon"></ion-icon>
+              <ion-icon name="close-outline" class="close-icon"></ion-icon>
+            </button>
+
+            <div class="input-wrapper">
+              <input type="search" name="search" placeholder="Search here" class="search-input">
+
+              <button class="search-submit" aria-label="Submit search">
+                <ion-icon name="search-outline"></ion-icon>
+              </button>
+            </div>
+
+          </div>
+        <a href="{% url 'wishlist' %}">
+          <button class="header-action-btn" aria-label="Open whishlist" data-panel-btn="whishlist">
+            <ion-icon name="heart-outline"></ion-icon>
+          </button>
+        </a>
+        <a href="{% url 'cart_view' %}">
+          <button class="header-action-btn" aria-label="Open shopping cart" data-panel-btn="cart">
+            <ion-icon name="basket-outline"></ion-icon>
+          </button>
+        </a>
+        <!-- 🔥 Admin Panel Icon (New) -->
+        <a href="{% url 'user_dashboard' %}" >
+          <button class="header-action-btn" aria-label="admin-icon" data-panel-btn="admin-icon">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </button>
+        </a>
+        
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+
+<script src="/static/js/script.js"></script>
+     <!-- 
+    - ionicon link
+    -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

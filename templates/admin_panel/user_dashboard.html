@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3><i class="fas fa-user"></i>  Your Profile </h3>
+        <a href="#account-info" class="nav-link active"><i class="fas fa-user-cog"></i> Account Info</a>
+        <a href="#wishlist" class="nav-link"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="#orders" class="nav-link"><i class="fas fa-box"></i> My Orders</a>
+        <form id="logoutForm" method="POST" action="{% url 'logout' %}" style="display: block;">
+            {% csrf_token %}
+            <button type="submit" id="logoutBtn" class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Welcome, {{ user.username }} 👋</h2>
+        <p>Email: {{ user.email }}</p>
+
+        <!-- Account Info Section -->
+<div id="account-info" class="section active-section">
+    <h5><i class="fas fa-user-cog"></i> Account Information</h5>
+    
+    <!-- Display Account Information -->
+    <div class="account-details">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <button id="editProfileBtn" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button>
+    </div>
+</div>
+
+<!-- Edit Profile Popup Form -->
+<div id="editProfilePopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <h4><i class="fas fa-user-edit"></i> Edit Profile</h4>
+        <form method="POST" action="{% url 'edit_account' %}">
+            {% csrf_token %}
+            <label>Username</label>
+            <input type="text" name="username" value="{{ user.username }}" required>
+            
+            <label>Email</label>
+            <input type="email" name="email" value="{{ user.email }}" required>
+            
+            <label>New Password (optional)</label>
+            <input type="password" name="password">
+            
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+
+        <!-- Wishlist Section -->
+        <div id="wishlist" class="section">
+            <!-- Wishlist Section -->
+<div id="wishlist" class="section" style="padding-top: 0px; padding-bottom: 0px;">
+    <h5><i class="fas fa-heart"></i> Wishlist</h5>
+
+    <!-- Wishlist Grid Container -->
+    <div class="wishlist-grid">
+        {% for item in wishlist_items %}
+        <div class="wishlist-card">
+            <div class="wishlist-img">
+                {% if item.fruit %}
+                    <img src="{{ item.fruit.photo.url }}" alt="{{ item.fruit.title }}">
+                    <p class="price">₹{{ item.fruit.price }}</p>
+                {% elif item.pulse %}
+                    <img src="{{ item.pulse.photo.url }}" alt="{{ item.pulse.title }}">
+                    <p class="price">₹{{ item.pulse.price }}</p>
+                {% elif item.vegie %}
+                    <img src="{{ item.vegie.photo.url }}" alt="{{ item.vegie.title }}">
+                    <p class="price">₹{{ item.vegie.price }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Remove Button -->
+            <a href="{% url 'remove_from_wishlist' item.id %}" class="remove-btn">
+                <i class="fas fa-trash"></i> Remove
+            </a>
+        </div>
+        {% empty %}
+        <p class="text-center">No items in your wishlist yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+        </div>
+
+         <!-- My Orders Section -->
+         <div id="orders" class="section">
+            <h5><i class="fas fa-box"></i> My Orders</h5>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>
+                            <a href="#" class="order-id"
+                            data-order-id="{{ order.id }}"
+                            data-status="{{ order.status }}"
+                            data-total="{{ order.total_price }}"
+                            data-address="{{ order.shipping_address }}"
+                            data-items='{{ order.items_json|escapejs }}'> <!-- Ensure JSON is correctly formatted -->
+                             #{{ order.id }}
+                         </a>
+                        </td>
+                        <td>₹{{ order.total_price }}</td>
+                        <td class="status-{{ order.status|lower }}">{{ order.status }}</td>
+                        <td>
+                            <a href="{% url 'track_order' %}?order_id={{ order.id }}" class="track-btn">
+                                <i class="fas fa-truck"></i> Track
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4" class="text-center">No orders yet</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+<!-- Order Details Popup -->
+<div id="orderDetailsModal" class="order-popup">
+    <div class="order-popup-content">
+        <span id="orderDetailsClose" class="close-btn">&times;</span>
+        <h4><i class="fas fa-receipt"></i> Order Details</h4>
+        <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+        <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
+        <p><strong>Total Price:</strong> ₹<span id="modalOrderTotal"></span></p>
+        <p><strong>Shipping Address:</strong> <span id="modalOrderAddress"></span></p>
+        <h5>Items Ordered:</h5>
+        <ul id="modalOrderItems"></ul>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll(".section");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove("active"));
+                this.classList.add("active");
+
+                // Remove highlight from all sections
+                sections.forEach(sec => sec.classList.remove("active-section"));
+
+                // Get the target section
+                const targetId = this.getAttribute("href").substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Scroll to the section
+                    targetSection.scrollIntoView({ behavior: "smooth" });
+                    // Highlight the section
+                    targetSection.classList.add("active-section");
+                }
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const editProfileBtn = document.getElementById("editProfileBtn");
+    const popup = document.getElementById("editProfilePopup");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // Show popup with animation
+    editProfileBtn.addEventListener("click", function () {
+        popup.style.display = "flex";
+        setTimeout(() => popup.classList.add("show"), 10); // Delay for animation
+    });
+
+    // Close popup
+    closeBtn.addEventListener("click", function () {
+        popup.classList.remove("show");
+        setTimeout(() => (popup.style.display = "none"), 300); // Delay hiding to match animation
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener("click", function (event) {
+        if (event.target === popup) {
+            popup.classList.remove("show");
+            setTimeout(() => (popup.style.display = "none"), 300);
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (confirm("Are you sure you want to log out?")) {
+                document.getElementById("logoutForm").submit();
+            }
+        });
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const orderLinks = document.querySelectorAll(".order-id");
+    const modal = document.getElementById("orderDetailsModal");
+    const closeModal = document.getElementById("orderDetailsClose");
+    const modalOrderId = document.getElementById("modalOrderId");
+    const modalOrderStatus = document.getElementById("modalOrderStatus");
+    const modalOrderTotal = document.getElementById("modalOrderTotal");
+    const modalOrderAddress = document.getElementById("modalOrderAddress");
+    const modalOrderItems = document.getElementById("modalOrderItems");
+
+    orderLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Fetch order details from data attributes
+            const orderId = this.getAttribute("data-order-id");
+            const orderStatus = this.getAttribute("data-status");
+            const orderTotal = this.getAttribute("data-total");
+            const orderAddress = this.getAttribute("data-address");
+            const orderItemsJSON = this.getAttribute("data-items");
+
+            console.log("Order Items Raw JSON:", orderItemsJSON); // Debugging
+
+            // Ensure order items are parsed properly
+            let orderItems;
+            try {
+                orderItems = JSON.parse(orderItemsJSON);
+            } catch (error) {
+                console.error("Error parsing order items JSON:", error);
+                orderItems = [];
+            }
+
+            console.log("Parsed Order Items:", orderItems); // Debugging
+
+            // Populate modal fields
+            modalOrderId.innerText = orderId;
+            modalOrderStatus.innerText = orderStatus;
+            modalOrderTotal.innerText = orderTotal;
+            modalOrderAddress.innerText = orderAddress;
+
+            // Clear previous list
+            modalOrderItems.innerHTML = "";
+
+            // Add ordered items dynamically
+            if (Array.isArray(orderItems) && orderItems.length > 0) {
+                orderItems.forEach(item => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<strong>${item.name}</strong> (x${item.quantity}) - ₹${item.price}`;
+                    modalOrderItems.appendChild(li);
+                });
+            } else {
+                modalOrderItems.innerHTML = "<li>No items found</li>";
+            }
+
+            // Show popup
+            modal.style.display = "flex";
+        });
+    });
+
+    // Close modal
+    closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Close when clicking outside the modal
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+
+
+</script>
+
+
+</body>
+</html>

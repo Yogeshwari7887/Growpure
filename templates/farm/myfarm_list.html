@@ -1,0 +1,209 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farm List</title>
+    <style>
+        /* General reset and body styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+/* Add farm button styling */
+.add-farm-btn {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.add-farm-btn:hover {
+    background-color: #e68900;
+}
+
+/* Cow List Container */
+.farm-container {
+    justify-content: center;
+    padding: 20px;
+    max-width: 600%;
+}
+
+/* Farm Card */
+.farm-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px hsla(44, 75.60%, 51.80%, 0.10);
+    max-width: 800%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.farm-card h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.farm-card h6 {
+    font-size: 45px;
+    color: rgb(220, 115, 17);
+    text-align: center;
+    margin-top: 40px;
+}
+
+.description {
+    margin: 10px 0;
+    font-size: 22px;
+    color: #555;
+    justify-content: left;
+    margin-top: 30px;
+    margin-left: 40px;
+    color: rgb(97, 73, 80);
+    line-height: 1.9;
+}
+
+.farm-video {
+    margin-top: 20px;
+    margin-left: 20px;
+    max-width: 1000%;
+    align-self: center;
+    height: 450px;
+}
+
+/* Updated farm-photo to display images vertically */
+.farm-photo {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    display: block; /* Changed to block for vertical stacking */
+    width: 70%;
+    margin-bottom: 20px; /* Add space between images */
+    gap:50px;
+}
+
+/* Styling for images */
+.farm-photo img {
+    width: 25%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure full width on larger screens */
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition for scaling, fading, and shadow */
+    border-radius: 8px; /* Optional: add rounded corners */
+    gap:50px;
+}
+
+/* Hover effect for images */
+.farm-photo img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    opacity: 0.9; /* Slightly fade the image */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add shadow around image */
+}
+
+/* Optional: Add a smooth transition effect for video */
+.farm-video video {
+    margin-top: 20px;
+    margin-left: 40px;
+    text-align: center;
+    max-width: 1000%;
+    height: 450px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Creation Date */
+.created-at {
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+}
+
+.farm-container {
+    display: flex; /* Use Flexbox to align items horizontally */
+    justify-content: space-between; /* Distribute cards evenly */
+    gap: 30px; /* Increase gap between farm cards */
+    justify-content: flex-start; /* Align items to the left */
+    flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.farm-photo {
+    width: auto;
+    height: auto;
+} 
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>OUR FARMS</h1>
+        </div>
+    </header>
+    <div class="farm-container">
+        {% for farm in farms %}
+            <div class="farm-card">
+                <h2>{{ farm.title }}</h2>
+                
+                <!-- Display Video -->
+                {% if farm.video %}
+                    <div class="farm-video">
+                        <video controls>
+                            <source src="{{ farm.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                {% endif %}
+                
+                <h6><i>Think, Heaven. But Better.</i></h6>
+                <p class="description">{{ farm.description }}</p>
+                
+                <!-- Display Photos -->
+                <div class="farm-photo">
+                    {% if farm.photos1 %}
+                        <img src="{{ farm.photos1.url }}" alt="{{ farm.title }}">
+                    {% endif %}
+                    {% if farm.photos2 %}
+                        <img src="{{ farm.photos2.url }}" alt="{{ farm.title }}">
+                    {% endif %}
+                    {% if farm.photos3 %}
+                        <img src="{{ farm.photos3.url }}" alt="{{ farm.title }}">
+                    {% endif %}
+                </div>
+
+                <!-- Display Creation Date -->
+                <p class="created-at">Created at: {{ farm.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

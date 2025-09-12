@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} - GrowPure Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* --- Global Styles --- */
+        body {
+            background-color: #F4EFEA;
+            font-family: 'Poppins', sans-serif;
+            color: #2C3E50;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1E5631;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .blog-meta {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #34495e;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #1E5631;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background-color: #145A32;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2rem;
+            }
+
+            .blog-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    {% block content %}
+    <div class="container">
+        <div class="blog-container">
+            <h1 class="blog-title">{{ post.title }}</h1>
+            <p class="blog-meta">By <strong>{{ post.author }}</strong> | {{ post.created_at }}</p>
+
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="blog-image" alt="{{ post.title }}">
+            {% endif %}
+
+            <div class="blog-content">
+                <p>{{ post.content|safe }}</p>
+            </div>
+
+            <a href="{% url 'blog_list' %}" class="btn-back">← Back to Blog</a>
+        </div>
+        
+    </div>
+    {% endblock %}
+
+</body>
+</html>

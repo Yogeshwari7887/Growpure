@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Farm List</title>
+    <style>
+        /* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
+
+/* Farm Container */
+.farm-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Farm Card */
+.farm-card {
+    background: white;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+    padding: 15px;
+    max-width: 1150px;
+    height: auto;
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.farm-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Title */
+.farm-card h2 {
+    color: #27ae60;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.farm-card h1 {
+    font-size: 2.5rem;
+    color: #f4be19;
+    margin: 30px 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.dis {
+    color: #bd7fa1;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+
+/* Image */
+.farm-card img {
+    width: 100%;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.farm-card img:hover {
+    opacity: 0.9;
+}
+
+/* Description */
+.farm-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Video */
+.farm-card video {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .farm-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h1>My Farm Gallery</h1>
+    <div class="farm-container">
+        {% for farm in farms %}
+            <div class="farm-card">
+                <h2>{{ farm.title }}</h2>
+                {% if farm.video %}
+                    <video controls>
+                        <source src="{{ farm.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            </div>
+            <div class="farm-card">
+                <h1><i>Think, Heaven. But Better.</i></h1>
+            <h6 class="dis">{{ farm.description }}</h6>
+            </div>
+            <img src="{{ farm.photo1.url }}" alt="{{ farm.title }}">
+            <img src="{{ farm.photo2.url }}" alt="{{ farm.title }}">
+            <img src="{{ farm.photo3.url }}" alt="{{ farm.title }}">
+        {% endfor %}
+    </div>
+</body>
+</html>

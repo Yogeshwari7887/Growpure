@@ -1,0 +1,74 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/static/css/fruit.css"> -->
+    <title>My Wishlist</title>
+    <style>
+        /* Styling for the Remove from Wishlist button */
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #b9b8b8, #6a6969); /* Dark Gray Gradient */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px; /* Square with slightly rounded edges */
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+    
+        /* Hover effect */
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #2c2c2c, #3a3a3a); /* Reverse Gradient */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+    
+        /* Click effect */
+        .remove-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+    
+</head>
+<body style="background-color: #f4f7fc;">
+
+    <h1 style="color: #dc3545;">❤️ My Wishlist</h1>
+
+    <div class="container">
+        {% for item in wishlist_items %}
+              <div class="fruit" style="position: relative;">
+                {% if item.fruit %}
+                  <img src="{{ item.fruit.photo.url }}" alt="{{ item.fruit.title }}">
+                  <h2>{{ item.fruit.title }} (Fruit)</h2>
+                  <p>Price: ₹{{ item.fruit.price }}</p>
+                {% elif item.pulse %}
+                  <img src="{{ item.pulse.photo.url }}" alt="{{ item.pulse.title }}">
+                  <h2>{{ item.pulse.title }} (Pulse)</h2>
+                  <p>Price: ₹{{ item.pulse.price }}</p>
+                {% elif item.vegie %}
+                  <img src="{{ item.vegie.photo.url }}" alt="{{ item.vegie.title }}">
+                  <h2>{{ item.vegie.title }} (Vegie)</h2>
+                  <p>Price: ₹{{ item.vegie.price }}</p>
+                {% endif %}
+                
+                <!-- Remove button -->
+                <a href="{% url 'remove_from_wishlist' item.id %}">
+                    <button class="remove-btn">✖</button>
+                </a>
+              </div>
+        {% empty %}
+            <p>No items in your wishlist yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+

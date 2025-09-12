@@ -1,0 +1,265 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farmer</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
+    <style>
+        /* static/css/styles.css */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+        }
+        
+        .farmer-container {
+            justify-content: space-between;
+            padding: 20px;
+        }
+        
+        .farmer-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800%;
+            margin: 20px;
+            padding: 20px;
+        }
+        
+        .farmer-card h2 {
+            font-size: 24px;
+            color: #333;
+            justify-content: center;
+        }
+        
+       
+        .description {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #555;
+            justify-content: center;
+            justify-content: left;
+            margin-top: 30px;
+            margin-left: 40px;
+            color: rgb(97, 73, 80);
+            line-height: 1.9; /* This controls the space between the lines */
+        }
+       
+        .farmer-card h6 {
+            font-size: 45px !important;
+            color: rgb(220, 115, 17) !important;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .farmer-card h4 {
+            font-size: 20px;
+            color:rgb(85, 220, 17);
+            margin-top: 20px;
+            justify-content:left;
+        }
+
+       
+        .farmer-card h5 {
+            font-size: 20px;
+            color:rgb(85, 220, 17);
+            margin-top: 20px;
+            justify-content:left;
+        }
+
+        
+        .farmer-card h7 {
+            font-size: 20px;
+            color:rgb(85, 220, 17);
+            margin-top: 30px;
+            justify-content:left;
+        }
+        
+        .farmer-card h8 {
+            font-size: 20px;
+            color:rgb(85, 220, 17);
+            margin-top: 20px;
+            justify-content:left;
+        }
+
+        
+        .farmer-card h9 {
+            font-size: 20px;
+            color:rgb(85, 220, 17);
+            margin-top: 20px;
+            justify-content:left;
+        }
+        
+
+        .farmer-video1 {
+            margin-top: 20px;
+            margin-left: 40px;
+            text-align: center;
+            max-width: 100%;
+            height: 450px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        
+        .farmer-video1 video {
+            max-width: 100%;
+            height:450px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+
+        .farmer-photo {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            text-align: center;
+            display: flex; /* Flexbox to align items horizontally */
+            justify-content: center; /* Center images horizontally */
+            gap: 20px; /* Add space between images */
+            flex-wrap: wrap; 
+           
+        }  
+
+        .farmer-photo1 {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            text-align: center;
+            display: flex; /* Flexbox to align items horizontally */
+            justify-content: center; /* Center images horizontally */
+            gap: 20px; /* Add space between images */
+            flex-wrap: wrap; 
+           
+        } 
+
+        .farmer-photo1 img {
+            width: 95%;  /* Adjust the percentage as needed */
+            border-radius: 8px;
+        }
+
+        .farmer-photo img {
+            width: 55%;  /* Adjust the percentage as needed */
+            border-radius: 8px;
+        }
+
+        .created-at {
+            font-size: 18px;
+            color: #777;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>OUR HAPPY FARMERS</h1>
+        </div>
+    </header>
+
+    <div class="farmer-container">
+        {% for farmer in farmers %}
+            <div class="farmer-card">
+                <h2>{{ farmer.title }}</h2>
+                 
+                {% if farmer.photos1 %}
+                <div class="farmer-photo1">
+                    <img src="{{ farmer.photos1.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+                <br>
+
+                <h6>Meet The Happy Farmers Who Grow Your Food:</h6>
+                <h4>Gauri Aaji, from Murbad</h4>
+                <p class="description">{{ farmer.description1 }}</p>
+
+                   
+                {% if farmer.photos2 %}
+                <div class="farmer-photo">
+                    <img src="{{ farmer.photos2.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+                   
+                {% if farmer.photos3 %}
+                <div class="farmer-photo">
+                    <img src="{{ farmer.photos3.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+
+                <h5>Parsuram Kaka, from Goveli.</h5>
+                <p class="description">{{ farmer.description2 }}</p>
+
+
+                {% if farmer.video1 %}
+                    <div class="farmer-video1">
+                        {% comment %} <h3>Video</h3> {% endcomment %}
+                        <video controls>
+                            <source src="{{ farmer.video1.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                {% endif %}
+
+
+                <h7>Usha Tai, from Kolam Gaon</h7>
+                <p class="description">{{ farmer.description3 }}</p>
+    
+                {% if farmer.photos4 %}
+                <div class="farmer-photo">
+                    <img src="{{ farmer.photos4.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+
+                {% if farmer.photos5 %}
+                <div class="farmer-photo">
+                    <img src="{{ farmer.photos5.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+
+                <h8>Jay, from Assam</h8>
+                <p class="description">{{ farmer.description4 }}</p>
+                
+
+                {% if farmer.photos6 %}
+                <div class="farmer-photo">
+                    <img src="{{ farmer.photos6.url }}" alt="{{ farmer.title }}">
+                </div>
+                {% endif %}
+               
+                
+                <h9>kalpesh from aasam</h9>
+                <p class="description">{{ farmer.description5 }}</p>
+    
+ 
+                <p class="created-at">Created at: {{ farmer.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Order</title>
+
+    <!-- Bootstrap & Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(to right, #E3F2FD, #FCE4EC);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #0D47A1;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields with Icons */
+        .input-group {
+            position: relative;
+        }
+
+        .input-group-text {
+            background: #0D47A1;
+            color: #fff;
+            border-radius: 8px 0px 0px 8px;
+            border: none;
+            padding: 12px;
+        }
+
+        .form-control {
+            border-radius: 0px 8px 8px 0px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #0D47A1;
+            box-shadow: 0px 0px 10px rgba(13, 71, 161, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #0D47A1;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #082B74;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: #E91E63;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2><i class="fa-solid fa-edit"></i> Edit Order</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+            <input type="text" name="full_name" value="{{ order.full_name }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" name="email" value="{{ order.email }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+            <input type="text" name="phone" value="{{ order.phone }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+            <input type="text" name="address" value="{{ order.address }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-city"></i></span>
+            <input type="text" name="city" value="{{ order.city }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-flag"></i></span>
+            <input type="text" name="state" value="{{ order.state }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-envelope-open-text"></i></span>
+            <input type="text" name="zip_code" value="{{ order.zip_code }}" class="form-control" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-wallet"></i></span>
+            <select name="payment_method" class="form-control">
+                <option value="COD" {% if order.payment_method == "COD" %}selected{% endif %}>Cash on Delivery</option>
+                <option value="UPI" {% if order.payment_method == "UPI" %}selected{% endif %}>UPI Payment</option>
+                <option value="CARD" {% if order.payment_method == "CARD" %}selected{% endif %}>Credit/Debit Card</option>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Update Order</button>
+            <a href="{% url 'manage_orders' %}" class="btn btn-secondary"><i class="fa-solid fa-ban"></i> Cancel</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

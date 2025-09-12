@@ -1,0 +1,209 @@
+<!-- templates/producer_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producers</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
+    <style>
+        /* static/css/styles.css */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+        }
+        
+        .producer-container {
+            flex-wrap: wrap; 
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 600%;
+        }
+        
+        .producer-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px hsla(44, 75.60%, 51.80%, 0.10);
+            max-width: 800%;
+            margin: 20px;
+            padding: 20px;
+        }
+        
+        .producer-card h2 {
+            font-size: 24px;
+            color: #333;
+            justify-content: center;
+        }
+        
+        .description {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #555;
+            justify-content: center;
+            justify-content: left;
+            margin-top: 30px;
+            margin-left: 40px;
+            color: rgb(97, 73, 80);
+            line-height: 1.9;
+        }
+
+        .description p {
+            margin-bottom: 20px;
+            line-height: 1.9;
+            justify-content:space-between;
+        }
+
+        .producer-card h6 {
+            font-size: 45px;
+            color:rgb(220, 115, 17);
+            text-align:center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .producer-video{
+            margin-top: 20px;
+            margin-left: 40px;
+            text-align: center;
+            max-width: 100%;
+            height: 450px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        
+        
+        .producer-photo11 {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            text-align: center;
+            display: flex; /* Flexbox to align items horizontally */
+            justify-content: center; /* Center images horizontally */
+            gap: 20px; /* Add space between images */
+            flex-wrap: wrap;
+        }  
+
+        
+        .producer-photo12 {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            text-align: center;
+            display: flex; /* Flexbox to align items horizontally */
+            justify-content: center; /* Center images horizontally */
+            gap: 20px; /* Add space between images */
+            flex-wrap: wrap;
+        }  
+        
+        
+        
+        .producer-video video {
+            max-width: 100%;
+            height:450px;
+            border-radius: 8px;
+        }
+        
+        .producer-photo11 img {
+            max-width: 100%;
+            border-radius: 8px; 
+        }
+
+         
+        .producer-photo12 img {
+            max-width: 100%;
+            border-radius: 8px; 
+        }
+        
+        .created-at {
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>HELTHY PRODUCE</h1>
+        </div>
+    </header>
+
+    <div class="producer-container">
+        {% for producer in producers %}
+            <div class="producer-card">
+                <h2>{{ producer.title }}</h2>
+
+                  <!-- Display Photo2 -->
+                  {% if producer.photos11 %}
+                  <div class="producer-photo11">
+                      {% comment %} <h3>Photo</h3> {% endcomment %}
+                      <img src="{{ producer.photos11.url }}" alt="{{ producer.title }}">
+                  </div>
+                  {% endif %}
+
+
+                  <h6><i>HEALTHY PRODUCERS</i></h6>
+                  {% comment %} display descriptiopn {% endcomment %}
+                  <p class="description">{{ producer.description }}</p>
+
+                   <!-- Display Photo12 -->
+               {% if producer.photos12 %}
+               <div class="producer-photo12">
+                   <img src="{{ producer.photos12.url }}" alt="{{ producer.title }}">
+               </div>
+               {% endif %}
+
+               <p class="description">Healthy female producers, whether livestock or agricultural plants, 
+                thrive when provided with proper nutrition, care, and a stress-free environment. Ensuring access 
+                to high-quality feed, clean water, and regular health check-ups are essential for optimal productivity.
+                For livestock, especially dairy cows or breeding animals, maintaining a balanced diet rich in necessary
+                nutrients is crucial for reproductive health and milk production. Additionally, minimizing exposure to stressors,
+                providing safe and clean housing, and regular monitoring for early signs of illness can help sustain their health and 
+                improve overall productivity. Consistent care and management lead to healthy,
+                productive female producers that contribute positively to the farm’s success.</p>
+                
+                       <!-- Display Video -->
+                       {% if producer.video %}
+                       <div class="producer-video">
+                           {% comment %} <h3>Video</h3> {% endcomment %}
+                           <video controls>
+                               <source src="{{ producer.video.url }}" type="video/mp4">
+                               Your browser does not support the video tag.
+                           </video>
+                       </div>
+                       {% endif %}
+
+                
+                <p class="created-at">Created at: {{ producer.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

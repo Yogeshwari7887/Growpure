@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    
+    <!-- Bootstrap & Icon Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* General Page Styling */
+        body {
+            background: linear-gradient(to right, #E3F2FD, #FCE4EC);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #0D47A1;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Form Input Styling */
+        .input-group {
+            position: relative;
+        }
+
+        .input-group-text {
+            background: #0D47A1;
+            color: #fff;
+            border-radius: 8px 0px 0px 8px;
+            border: none;
+            padding: 12px;
+        }
+
+        .form-control {
+            border-radius: 0px 8px 8px 0px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #0D47A1;
+            box-shadow: 0px 0px 10px rgba(13, 71, 161, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #0D47A1;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #082B74;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: #E91E63;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+{% block content %}
+<div class="container">
+    <h2><i class="fa-solid fa-user-gear"></i> Edit User</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+            <input type="text" name="username" class="form-control" placeholder="Enter username" value="{{ user.username }}" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-envelope-open-text"></i></span>
+            <input type="email" name="email" class="form-control" placeholder="Enter email" value="{{ user.email }}" required>
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user-pen"></i></span>
+            <input type="text" name="first_name" class="form-control" placeholder="Enter first name" value="{{ user.first_name }}">
+        </div>
+
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fa-solid fa-user-edit"></i></span>
+            <input type="text" name="last_name" class="form-control" placeholder="Enter last name" value="{{ user.last_name }}">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            <a href="{% url 'manage_users' %}" class="btn btn-secondary"><i class="fa-solid fa-ban"></i> Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+</body>
+</html>

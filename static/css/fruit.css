@@ -1,0 +1,125 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+      
+body { 
+  font-family: 'Poppins', sans-serif; 
+  text-align: center;  }
+
+
+.container { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); /* Always 4 products per row */
+  gap: 30px; /* Space between products */
+  justify-content: center; 
+  padding: 20px; 
+  max-width: 1200px; 
+  margin: auto; 
+}
+
+.fruit { 
+  border: 2px solid #ddd; 
+  padding: 15px; 
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2); 
+  background: #fff; 
+  transition: border-color 0.3s ease, transform 0.3s ease; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; /* Center content */
+  text-align: center;
+}
+
+.fruit:hover { 
+  border-color: #28a745; 
+  transform: scale(1.05); 
+}
+
+.fruit img { 
+  width: 100%; 
+  height: auto; 
+}
+
+h2 { 
+  font-size: 20px; 
+  color: #333; 
+}
+
+p { 
+  margin: 5px 0; 
+  font-size: 16px; 
+  color: #555; 
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .container { grid-template-columns: repeat(4, 1fr); } /* Still 4 per row */
+}
+
+@media (max-width: 992px) {
+  .container { grid-template-columns: repeat(4, 1fr); } /* Still 4 per row */
+}
+
+@media (max-width: 768px) {
+  .container { grid-template-columns: repeat(4, 1fr); } /* Still 4 per row */
+}
+
+@media (max-width: 480px) {
+  .container { grid-template-columns: repeat(4, 1fr); } /* Still 4 per row */
+}
+
+
+/* Button Container */
+.btn-container {
+  display: flex;
+  justify-content: center; /* Centering buttons */
+  align-items: center;
+  gap: 15px; /* Space between buttons */
+  margin-top: 15px;
+}
+
+/* Common Button Styling */
+.btn {
+  width: 50px;  /* Square shape */
+  height: 40px; /* Square shape */
+  border: none;
+  border-radius: 8px; /* Slightly rounded edges for modern look */
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  text-decoration: none; /* Remove underline */
+  border: 3px solid transparent; /* Default border */
+  margin-top: 4px;
+}
+
+/* Ensure <a> wraps properly */
+.btn-container a {
+  text-decoration: none; /* Remove default underline */
+}
+
+/* Add to Cart Button */
+.btn-cart {
+  background: linear-gradient(to right, #4dc151, #2e7d32);
+  color: white;
+}
+
+.btn-cart:hover {
+  background: linear-gradient(to right, #458748, #2b7030);
+  transform: scale(1.1);
+  border: 3px solid #ffffff;
+}
+
+/* Wishlist Button */
+.btn-wishlist {
+  background: linear-gradient(to right, #e13532, #b71c1c);
+  color: white;
+}
+
+.btn-wishlist:hover {
+  background: linear-gradient(to right, #b71c1c, #880e4f);
+  transform: scale(1.1);
+  border: 3px solid #ffffff;
+}

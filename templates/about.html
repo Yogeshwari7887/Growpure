@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% comment %} {% include 'header.html' %}  {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about GrowPure, a company committed to sustainable, eco-friendly gardening and organic products.">
+    <title>About Us - GrowPure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 120px 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Introduction */
+        .about-intro {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2b8f6f 0%, #3aa17c 100%);
+            color: white;
+            
+        }
+
+        .about-intro::before {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .about-intro h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .about-intro p {
+            font-size: 2.6rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            color:white;
+        }
+
+        /* Section Headings */
+        section h2 {
+            color: #2b8f6f;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 3px;
+            background-color: #2b8f6f;
+            transition: width 0.3s ease;
+            padding-left:10%;
+        }
+
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        /* Lists */
+        section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        section ul li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            text-align:left;
+            position: relative;
+            font-size: 2.5rem;
+            padding-left:10%;
+            line-height:1.9;
+        }
+
+        section ul li::before {
+            content: "🌱";
+            font-size: 2.6rem;
+            position: absolute;
+            left : 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2b8f6f;
+            transition: transform 0.3s ease;
+      
+        }
+
+        section ul li:hover::before {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* Vision and Mission Sections */
+        .our-vision, .our-mission {
+            background: #fff;
+            font-size: 2rem;
+        }
+
+        .our-vision p 
+        {
+            font-size: 2.5rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .our-vision 
+            img {
+                max-width: 190%;
+                border-radius: 8px;  
+            }
+            .our-vision .vision {
+                margin-top: 20px;
+                margin-left: 40px;
+                margin-right: 40px;
+                text-align: center;
+                display: flex; /* Flexbox to align items horizontally */
+                justify-content: center; /* Center images horizontally */
+                gap: 20px; /* Add space between images */
+                flex-wrap: wrap;}
+        
+        
+        .our-mission p {
+            font-size: 2.5rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .our-mission img {
+            max-width: 100%;
+            border-radius: 8px;            
+        }
+        .our-mission .mission {
+                margin-top: 20px;
+                margin-left: 40px;
+                height: 170%;
+                margin-right: 40px;
+                text-align: center;
+                display: flex; /* Flexbox to align items horizontally */
+                justify-content: center; /* Center images horizontally */
+                gap: 20px; /* Add space between images */
+                flex-wrap: wrap;}
+        
+        
+    
+
+        /* Why Choose Us Section */
+        .why-choose-us ul li {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align:left;
+            transition: all 0.3s ease;
+            font-size: 2.5rem;
+            padding-left:10%;
+
+        }
+
+        .why-choose-us ul li:hover {
+            background: #e9ecef;
+            transform: translateX(10px);
+        }
+
+        /* Join Us Section */
+        .join-us {
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .join-us p {
+            font-size: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            main {
+                padding: 100px 1rem 2rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-intro h1 {
+                font-size: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+
+
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %} 
+    <main>
+        <section class="about-intro">
+            <h1>Welcome to GrowPure</h1>
+            <p>At GrowPure, we're revolutionizing the way people connect with organic farming and sustainable agriculture. Our platform bridges the gap between conscious consumers and dedicated farmers, ensuring access to pure, naturally grown produce while supporting local farming communities.</p>
+        </section>
+
+        <section class="our-vision">
+            <h2>Our Vision</h2>
+                <div class="vision">
+                    <img src="/static/images/WhatsApp Image 2025-04-04 at 14.43.48_13f90f5d.jpg" width="350" height="250" loading="lazy">
+                </div>
+            <p>To create a sustainable ecosystem where farmers thrive, consumers have access to pure organic produce, and traditional farming practices are preserved for future generations. We envision a world where every family has access to chemical-free food, and every farmer receives fair compensation for their dedication to organic farming.</p> 
+        </section>
+
+        <section class="our-mission">
+            <h2>Our Mission</h2>
+            <div class="mission">
+                <img src="/static/images/WhatsApp Image 2025-04-04 at 14.43.46_f4733649.jpg" width="350" height="250" loading="lazy">
+            </div>
+            <p>Our mission is to:</p>
+            <ul>
+                <li>Empower local farmers by providing them a direct platform to reach conscious consumers</li>
+                <li>Promote sustainable and traditional farming practices that preserve soil health</li>
+                <li>Ensure transparency in the farm-to-table journey of every product</li>
+                <li>Support the growth of organic farming communities across the region</li>
+                <li>Make pure, organic produce accessible and affordable for everyone</li>
+            </ul>
+        </section>
+
+        <section class="why-choose-us">
+            <h2>Why Choose GrowPure?</h2>
+            <ul>
+                <li><b>Direct Farm Connection:</b> Purchase directly from verified organic farmers</li>
+                <li><b>Quality Assurance:</b> Every product meets strict organic farming standards</li>
+                <li><b>Fair Trade: </b>Ensuring farmers receive fair compensation for their produce</li>
+                <li><b>Sustainable Practices:</b> Supporting environmentally conscious farming methods</li>
+                <li><b>Community Support:</b> Contributing to the growth of local farming communities</li>
+            </ul>
+        </section>
+
+        <section class="join-us">
+            <h2>Join Our Journey</h2>
+            <p>Whether you're a conscious consumer looking for pure organic produce or a farmer dedicated to sustainable agriculture, GrowPure welcomes you to be part of our growing community. Together, we can create a healthier future for both people and the planet.</p>
+        </section>
+    </main>
+</body>
+</html>
+ {% include 'footer.html' %}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            padding-top: 20px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+
+        .sidebar .toggle-btn {
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .toggle-btn:hover {
+            background: #1abc9c;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+            transition: 0.3s ease-in-out;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn {
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .btn-edit {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+        }
+        .btn-edit:hover {
+            background-color: #219150;
+        }
+        .btn-delete {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #a93226;
+        }
+        .btn-success {
+            background-color: #16a085;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #13896b;
+        }
+        .btn-secondary {
+            background-color: #7f8c8d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #6c7a7a;
+        }
+    </style>
+    <script>
+        function searchUser() {
+            let input = document.getElementById("searchUserInput").value.toLowerCase();
+            let rows = document.querySelectorAll("#userTable tbody tr");
+
+            rows.forEach(row => {
+                let name = row.children[1].innerText.toLowerCase();
+                let email = row.children[2].innerText.toLowerCase();
+                let phone = row.children[3].innerText.toLowerCase();
+
+                if (name.includes(input) || email.includes(input) || phone.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="{% url 'manage_orders' %}"><i class="fas fa-tasks"></i> Manage Orders</a>
+        <a href="{% url 'manage_products' %}"><i class="fas fa-box-open"></i> Manage Products</a>
+        <a href="{% url 'manage_users' %}"><i class="fas fa-users"></i> Manage Users</a>
+        <a href="{% url 'manage_feedback' %}"><i class="fas fa-comments"></i> Customer Feedback</a>
+        <a href="{% url 'coupon_list' %}" class="active"><i class="fas fa-ticket-alt"></i> Manage Coupons</a>
+    </div>
+    <div class="main-content">
+        <h2 class="text-center mb-4"><i class="fas fa-users"></i> Manage Users</h2>
+        <input type="text" id="searchUserInput" class="form-control mb-3" onkeyup="searchUser()" placeholder="Search users by name, email, or phone...">
+        <a href="{% url 'add_user' %}" class="btn btn-success mb-3"><i class="fas fa-user-plus"></i> Add New User</a>
+        <table class="table table-bordered" id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Full Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>#{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>
+                        <a href="{% url 'edit_user' user.id %}" class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                        <form action="{% url 'delete_user' user.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+</body>
+</html>

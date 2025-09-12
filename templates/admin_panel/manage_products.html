@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            padding-top: 20px;
+            transition: 0.3s ease-in-out;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            background: white;
+        }
+        .table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn {
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .btn-edit {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+        }
+        .btn-edit:hover {
+            background-color: #219150;
+        }
+        .btn-delete {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #a93226;
+        }
+        .section-title {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="{% url 'manage_orders' %}"><i class="fas fa-tasks"></i> Manage Orders</a>
+        <a href="{% url 'manage_products' %}"><i class="fas fa-box-open"></i> Manage Products</a>
+        <a href="{% url 'manage_users' %}"><i class="fas fa-users"></i> Manage Users</a>
+        <a href="{% url 'manage_feedback' %}"><i class="fas fa-comments"></i> Customer Feedback</a>
+        <a href="{% url 'coupon_list' %}" class="active"><i class="fas fa-ticket-alt"></i> Manage Coupons</a>
+    </div>
+    
+    <div class="main-content">
+        <h2 class="text-center mb-4"><i class="fas fa-box-open"></i> Manage Products</h2>
+        <input type="text" id="searchInput" class="form-control mb-3" onkeyup="searchProduct()" placeholder="Search products...">
+        <a href="{% url 'add_product' %}" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Add New Product</a>
+        
+        <!-- Fruits Section -->
+        <div class="section-title"><i class="fas fa-apple-alt"></i> Fruits</div>
+        <table class="table table-bordered productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in fruits %}
+                <tr>
+                    <td>#{{ product.id }}</td>
+                    <td><img src="{{ product.photo.url }}" alt="{{ product.title }}" width="50"></td>
+                    <td>{{ product.title }}</td>
+                    <td>₹{{ product.price }}</td>
+                    <td>
+                        <a href="{% url 'edit_product' category='fruit' product_id=product.id %}" class="btn btn-edit btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{% url 'delete_product' product.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Vegetables Section -->
+        <div class="section-title"><i class="fas fa-carrot"></i> Vegetables</div>
+        <table class="table table-bordered productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in vegies %}
+                <tr>
+                    <td>#{{ product.id }}</td>
+                    <td><img src="{{ product.photo.url }}" alt="{{ product.title }}" width="50"></td>
+                    <td>{{ product.title }}</td>
+                    <td>₹{{ product.price }}</td>
+                    <td>
+                        <a href="{% url 'edit_product' category='vegie' product_id=product.id %}" class="btn btn-edit btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{% url 'delete_product' product.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pulses Section -->
+        <div class="section-title"><i class="fas fa-seedling"></i> Pulses</div>
+        <table class="table table-bordered productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in pulses %}
+                <tr>
+                    <td>#{{ product.id }}</td>
+                    <td><img src="{{ product.photo.url }}" alt="{{ product.title }}" width="50"></td>
+                    <td>{{ product.title }}</td>
+                    <td>₹{{ product.price }}</td>
+                    <td>
+                        <a href="{% url 'edit_product' category='pulse' product_id=product.id %}" class="btn btn-edit btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{% url 'delete_product' product.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+
+
+    </div>
+    <script>
+        function searchProduct() {
+            let input = document.getElementById("searchInput").value.toLowerCase().trim();
+            let allRows = document.querySelectorAll("table tbody tr");
+    
+            allRows.forEach(row => {
+                let title = row.children[2].textContent.toLowerCase().trim(); // Target Title Column
+                if (title.includes(input) || input === "") {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    
+        // Trigger search on typing
+        document.getElementById("searchInput").addEventListener("keyup", searchProduct);
+    
+        // Optional: If you want a search button instead of just typing
+        function triggerSearch() {
+            searchProduct();
+        }
+    </script>
+    
+</body>
+</html>

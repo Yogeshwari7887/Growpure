@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Store</title>
+</head>
+<body>
+
+  <header class="gp-header">
+    <div class="gp-container">
+        <div class="gp-logo">
+            <a href="/">
+                <img src="/static/images/logo.png" alt="GrowPure Logo">
+            </a>
+        </div>
+        <nav class="gp-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/products/">Products</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="gp-actions">
+            <form class="gp-search-form">
+                <input type="text" placeholder="Search organic products...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <a href="/wishlist/" class="gp-icon-link"><i class="fas fa-heart"></i></a>
+            <a href="/cart/" class="gp-icon-link"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/account/" class="gp-icon-link"><i class="fas fa-user"></i></a>
+        </div>
+    </div>
+</header>
+
+
+      <!-- Popup Message (Placed at the top before the product listings) -->
+      {% if messages %}
+      <div id="cart-popup" class="cart-popup">
+          {% for message in messages %}
+              <p class="{{ message.tags }}">{{ message }}</p>
+          {% endfor %}
+      </div>
+  
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              let popup = document.getElementById("cart-popup");
+              if (popup) {
+                  popup.style.display = "block";
+                  setTimeout(() => {
+                      popup.style.display = "none";
+                  }, 2000);  // Popup disappears after 2 seconds
+              }
+          });
+      </script>
+      {% endif %} 
+      
+    <br>
+    <h1 style="color: #28a745;">🌿 Fresh Pulses Available</h1>
+    <br> 
+      <div class="container">
+        {% for pulse in pulses %}
+              <div class="fruit">
+                <img src="{{ pulse.photo.url }}" alt="{{ pulse.title }}">
+                <h2 style="margin-bottom: 0px;">{{ pulse.title }}</h2>
+                <p>Price: ₹{{ pulse.price }}</p>
+                
+                <a href="{% url 'add_to_cart' 'pulse' pulse.id %}">
+                  <button class="btn btn-cart">🛒 Add to Cart</button>
+               </a>
+
+                <a href="{% url 'add_pulse_to_wishlist' pulse.id %}">
+                  <button class="btn btn-wishlist">❤️ Wishlist</button>
+                </a>
+              </div>
+          {% endfor %}
+      </div>
+
+      <br><br> 
+
+      <footer class="gp-footer">
+        <div class="gp-footer-top">
+            <div class="gp-footer-column">
+                <h4>Explore GrowPure</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about/">About Us</a></li>
+                    <li><a href="/products/">Our Products</a></li>
+                    <li><a href="/contact/">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="gp-footer-column">
+                <h4>Customer Support</h4>
+                <ul>
+                    <li><a href="/faq/">FAQs</a></li>
+                    <li><a href="/shipping/">Shipping & Delivery</a></li>
+                    <li><a href="/returns/">Return Policy</a></li>
+                    <li><a href="/terms/">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="gp-footer-column">
+                <h4>Connect With Us</h4>
+                <div class="gp-social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <p>Join our organic community!</p>
+            </div>
+            <div class="gp-footer-column">
+                <h4>Contact Us</h4>
+                <ul class="gp-contact-info">
+                    <li><i class="fas fa-envelope"></i> info@growpure.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Organic Lane, Green City</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="gp-footer-newsletter">
+            <h4>Stay Updated!</h4>
+            <p>Subscribe to our newsletter for the latest organic news, offers, and tips.</p>
+            <form class="gp-newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    
+        <div class="gp-footer-bottom">
+            <p>&copy; 2025 GrowPure. All rights reserved.</p>
+            <ul class="gp-legal-links">
+                <li><a href="/privacy/">Privacy Policy</a></li>
+                <li><a href="/terms/">Terms of Service</a></li>
+                <li><a href="/sitemap/">Sitemap</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+
+     <!-- 
+    - ionicon link
+    -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

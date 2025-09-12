@@ -1,0 +1,56 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegies</title>
+    <link rel="stylesheet" href="/static/css/fruit.css">
+
+</head>
+<body style="background-color: #f4f7fc;">
+
+        <!-- Popup Message (Placed at the top before the product listings) -->
+        {% if messages %}
+        <div id="cart-popup" class="cart-popup">
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let popup = document.getElementById("cart-popup");
+                if (popup) {
+                    popup.style.display = "block";
+                    setTimeout(() => {
+                        popup.style.display = "none";
+                    }, 2000);  // Popup disappears after 2 seconds
+                }
+            });
+        </script>
+        {% endif %}
+        
+    <br>
+    <h1 style="color: #28a745;">🌿 Fresh Veggies Available</h1>
+    <br>
+    <div class="container">
+        {% for vegie in vegies %}
+        <div class="fruit">
+            <img src="{{ vegie.photo.url }}" alt="{{ vegie.title }}">
+            <h2 style="margin-bottom: 0px;">{{ vegie.title }}</h2>
+            <p>Price: ${{ vegie.price }}</p>
+            <a href="{% url 'add_to_cart' 'vegie' vegie.id %}">
+                <button class="btn btn-cart">🛒 Add to Cart</button>
+            </a>
+              <a href="{% url 'add_vegie_to_wishlist' vegie.id %}">
+                <button class="btn btn-wishlist">❤️ Wishlist</button>
+              </a>
+        </div>
+        {% endfor %}
+    </div>
+    <br><br>
+
+</body>
+</html>
+{% include 'footer.html' %}

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organica - Quality organic fruit & vegetables.</title>
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/home.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body id="top" >
+  <main>
+    <article>
+
+    
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+
+    <div class="top-bar">
+      <div class="container">
+        <p>Free shipping for all order of $105</p>
+      </div>
+    </div>
+
+    <div class="nav-wrapper">
+      <div class="container">
+
+        <div class="logo">
+          <img src="/static/images/logo.png" alt="Logo" style="width: 400px; height: auto;">
+        </div>
+
+        <!-- <h1 class="h1">
+          <a href="./index.html" class="logo">Grow<span class="span">Pure</span></a>
+        </h1> -->
+
+        <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+          <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <ul class="navbar-list">
+
+            <li>
+              <a href="{% url 'home' %}" class="navbar-link">Home</a>
+            </li>
+
+            <li>
+              <a href="{% url 'about' %}" class="navbar-link">About</a>
+            </li>
+
+            <li>
+              <a href="{% url 'shop' %}" class="navbar-link">Shop</a>
+            </li>
+
+            <li>
+              <a href="{% url 'blog_list' %}" class="navbar-link">Blog</a>
+            </li>
+
+            <li>
+              <a href="{% url 'contact' %}" class="navbar-link">Contact</a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <div class="header-action">
+
+          <div class="search-wrapper" data-search-wrapper>
+
+            <button class="header-action-btn" aria-label="Toggle search" data-search-btn>
+              <ion-icon name="search-outline" class="search-icon"></ion-icon>
+              <ion-icon name="close-outline" class="close-icon"></ion-icon>
+            </button>
+
+            <div class="input-wrapper">
+              <input type="search" name="search" placeholder="Search here" class="search-input">
+
+              <button class="search-submit" aria-label="Submit search">
+                <ion-icon name="search-outline"></ion-icon>
+              </button>
+            </div>
+
+          </div>
+
+        <a href="{% url 'wishlist' %}">
+          <button class="header-action-btn" aria-label="Open whishlist" data-panel-btn="whishlist">
+            <ion-icon name="heart-outline"></ion-icon>
+          </button>
+        </a>
+
+          <a href="{% url 'cart_view' %}">
+          <button class="header-action-btn" aria-label="Open shopping cart" data-panel-btn="cart">
+            <ion-icon name="basket-outline"></ion-icon>
+          </button>
+          </a>
+
+          <a href="{% url 'user_dashboard' %}" >
+            <button class="header-action-btn" aria-label="admin-icon" data-panel-btn="admin-icon">
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </button>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </header>
+
+
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="hero">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <p class="hero-subtitle">25% off all products.</p>
+
+            <h2 class="h1 hero-title">
+              Qualityful <span class="span">organic</span>
+              fruit & <span class="span">vegetables.</span>
+            </h2>
+
+            <p class="hero-text">
+              It has survived not only five centuries also there leaped.
+            </p>
+
+            <a href="{% url 'shop' %}" class="btn btn-primary">
+              <span class="span">Shop Now</span>
+
+              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+            </a>
+
+          </div>
+
+          <figure class="hero-banner">
+            <img src="/static/images/hero-banner.png" width="603" height="634" loading="lazy" alt="Vegetables"
+              class="w-100">
+          </figure>
+
+        </div>
+      </section>
+
+      <br><br><br><br>
+
+      <!-- 
+        - #SERVICE
+      -->
+
+      <section class="section service">
+        <div class="container">
+
+          <ul class="service-list">
+
+            <li class="service-item">
+              <div class="item-icon">
+                <img src="/static/images/service-icon-1.png" width="40" height="40" loading="lazy" alt="Truck icon">
+              </div>
+
+              <h3 class="h3 item-title">Free Shipping</h3>
+            </li>
+
+            <li class="service-item">
+              <div class="item-icon">
+                <img src="/static/images/service-icon-2.png" width="40" height="40" loading="lazy"
+                  alt="Payment card icon">
+              </div>
+
+              <h3 class="h3 item-title">Safe Payment</h3>
+            </li>
+
+            <li class="service-item">
+              <div class="item-icon">
+                <img src="/static/images/service-icon-3.png" width="40" height="40" loading="lazy" alt="Helpline icon">
+              </div>
+
+              <h3 class="h3 item-title">24/7 Support</h3>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+
+      <br><br><br><br> 
+
+      <!-- 
+        - #CTA
+      -->
+
+      <section class="cta">
+        <div class="container">
+
+          <p class="section-subtitle">Summer Offer</p>
+
+          <h2 class="h2 section-title">Up To 50% Off All Product.</h2>
+
+          <p class="cta-text">
+            It has survived not only five centuries also leaped.
+          </p>
+
+          <a href="{% url 'shop' %}" class="btn btn-primary">
+            <span>Shop Now</span>
+
+            <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+          </a>
+
+        </div>
+      </section>
+
+
+      <!-- 
+        - #PARTNER
+      -->
+
+      <br><br><br><br> 
+      <section class="section partner">
+        <div class="container">
+
+          <p class="section-subtitle"> -- Organic Food --</p>
+
+          <h2 class="h2 section-title">Trusted Partners</h2>
+
+          <ul class="has-scrollbar">
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-1.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-2.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-3.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-4.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-5.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+            <li class="partner-item">
+              <figure class="partner-logo">
+                <img src="/static/images/partner-6.png" width="132" height="134" loading="lazy" alt="Partner logo">
+              </figure>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+      <br><br><br><br> 
+
+
+      <!-- 
+        - #TESTIMONIALS
+      -->
+
+      <section class="section testimonials">
+        <div class="container">
+
+          <p class="section-subtitle"> -- Some Testimonial --</p>
+
+          <h2 class="h2 section-title">Feedback From Happy Clients</h2>
+
+          <ul class="has-scrollbar">
+
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="card-header">
+
+                  <img src="/static/images/quote-left.png" width="25" height="25" aria-hidden="true" alt="">
+
+                  <img src="/static/images/testimonial-1.jpg" width="90" height="90" loading="lazy"
+                    alt="Willow Peralta" class="card-avatar">
+
+                  <img src="/static/images/quote-right.png" width="25" height="25" aria-hidden="true" alt="">
+
+                </div>
+
+                <div class="rating-wrapper">
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                </div>
+
+                <blockquote class="card-text">
+                    "GrowPure offers fresh, chemical-free fruits, vegetables, and grains. Supporting farmers while enjoying high-quality organic food has never been easier. Exceptional service and taste—highly recommended!
+                  </blockquote>
+
+                <h3 class="card-title">Sandeep Patel</h3>
+
+              </div>
+            </li>
+
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="card-header">
+
+                  <img src="/static/images/quote-left.png" width="25" height="25" aria-hidden="true" alt="">
+
+                  <img src="/static/images/testimonial-2.jpg" width="90" height="90" loading="lazy"
+                    alt="Pamelia Hamrick" class="card-avatar">
+
+                  <img src="/static/images/quote-right.png" width="25" height="25" aria-hidden="true" alt="">
+
+                </div>
+
+                <div class="rating-wrapper">
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                </div>
+
+                <blockquote class="card-text">
+                  "GrowPure delivers pure, organic produce with farm-to-table transparency. Their freshness, eco-friendly packaging, and quick delivery make healthy eating effortless. A perfect choice for chemical-free food!
+                </blockquote>
+
+                <h3 class="card-title">Akshay Chaudhari</h3>
+
+              </div>
+            </li>
+
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="card-header">
+
+                  <img src="/static/images/quote-left.png" width="25" height="25" aria-hidden="true" alt="">
+
+                  <img src="/static/images/testimonial-3.jpg" width="90" height="90" loading="lazy"
+                    alt="Novella Gerber" class="card-avatar">
+
+                  <img src="/static/images/quote-right.png" width="25" height="25" aria-hidden="true" alt="">
+
+                </div>
+
+                <div class="rating-wrapper">
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                </div>
+
+                <blockquote class="card-text">
+                    "GrowPure delivers the freshest organic produce with amazing quality and farm transparency. Their eco-friendly packaging, quick delivery, and commitment to supporting farmers make healthy eating easy. Highly recommended for pure, chemical-free food!"
+                  </blockquote>
+
+                <h3 class="card-title">Swapnil Meheta</h3>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+      <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+    <div class="footer-top">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <p class="footer-text">
+            🌿 Bringing you the best organic vegetables, fruits, and grains straight from our farms!
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-skype"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Company</p>
+          </li>
+
+          <li>
+            <a href="{% url 'about' %}" class="footer-link">About Us</a>
+          </li>
+
+          <li>
+            <a href="{% url 'shop' %}" class="footer-link">Shop</a>
+          </li>
+
+          <li>
+            <a href="{% url 'blog_list' %}" class="footer-link">Blog</a>
+          </li>
+
+          <li>
+            <a href="{% url 'contact' %}" class="footer-link">Contact Us</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Contact</p>
+          </li>
+
+          <li class="footer-item">
+            <div class="contact-icon">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <address class="contact-link">
+              7 Green Lake Street Crawfordsville, IN 47933
+            </address>
+          </li>
+
+          <li class="footer-item">
+            <div class="contact-icon">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+
+            <a href="tel:+1800123456789" class="contact-link">+1 800 123 456 789</a>
+          </li>
+
+          <li class="footer-item">
+            <div class="contact-icon">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <a href="mailto:organica@help.com" class="contact-link">GrowPure@help.com</a>
+          </li>
+
+        </ul>
+
+        <div class="footer-list">
+
+          <p class="footer-list-title">Newsletter</p>
+
+          <p class="newsletter-text">
+            You will be notified when somthing new will be appear.
+          </p>
+
+          <form action="" class="footer-form">
+            <input type="email" name="email" placeholder="Email Address *" required class="footer-input">
+
+            <button type="submit" class="footer-form-btn" aria-label="Submit">
+              <ion-icon name="mail-outline"></ion-icon>
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">
+          &copy; 2025 <a href="#" class="copyright-link">GrowPure Foundation</a>. All Rights Reserved.
+        </p>
+
+        <ul class="footer-bottom-list">
+
+          <li>
+            <a href="#" class="footer-bottom-link">Term and Service</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-to-top" aria-label="Back to Top" data-back-top-btn>
+    <ion-icon name="arrow-up-outline"></ion-icon>
+  </a>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cows List</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
+    <style>
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    height: 50px;
+}
+
+header {
+    background-color: #50C878;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.add-cow-btn {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.add-cow-btn:hover {
+    background-color: #e68900;
+}
+
+.cow-container {
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 600%;
+}
+
+.cow-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px hsla(44, 75.60%, 51.80%, 0.10);
+    max-width: 800%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.cow-card h2 {
+    font-size: 24px;
+    color: #333;
+    justify-content: center;
+}
+
+.cow-card h6 {
+    font-size: 45px;
+    color:rgb(220, 115, 17);
+    text-align:center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.description {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #555;
+    justify-content: center;
+    justify-content: left;
+    margin-top: 30px;
+    margin-left: 40px;
+    color: rgb(97, 73, 80);
+    line-height: 1.9; /* This controls the space between the lines */
+}
+
+.description p {
+    margin-bottom: 20px;
+    line-height: 1.9;
+    justify-content:space-between;
+}
+
+.cow-video
+{
+    margin-top: 20px;
+    margin-left: 40px;
+    text-align: center;
+    max-width: 100%;
+    height: 450px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cow-photo11 {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
+    display: flex; /* Flexbox to align items horizontally */
+    justify-content: center; /* Center images horizontally */
+    gap: 20px; /* Add space between images */
+    flex-wrap: wrap;
+}
+
+.cow-photo12 {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
+    display: flex; /* Flexbox to align items horizontally */
+    justify-content: center; /* Center images horizontally */
+    gap: 20px; /* Add space between images */
+    flex-wrap: wrap;
+}
+.cow-video video {
+    max-width: 100%;
+    height:450px;
+    border-radius: 8px;
+}
+
+.cow-photo11 img {
+   max-width: 100%;
+    border-radius: 8px; 
+}
+
+.cow-photo12 img {
+    width: 50%;
+    border-radius: 8px; 
+}
+
+.created-at {
+    font-size: 18px;
+    color: #777;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>CARE-FREE Cows</h1>
+            {% comment %} <a href="{% url 'add_cow' %}" class="add-cow-btn">Add New Cow</a> {% endcomment %}
+        </div>
+    </header>
+    <div class="cow-container">
+        {% for cow in cows %}
+            <div class="cow-card">
+                <h2>{{ cow.title }}</h2>
+           
+                   <!-- Display Photo2 -->
+                   {% if cow.photos11 %}
+                   <div class="cow-photo11">
+                       {% comment %} <h3>Photo</h3> {% endcomment %}
+                       <img src="{{ cow.photos11.url }}" alt="{{ cow.title }}">
+                   </div>
+                   {% endif %}
+
+
+                   <h6><i>CARE FREE CATTLE</i></h6>
+                   {% comment %} display descriptiopn {% endcomment %}
+                   <p class="description">{{ cow.description }}</p>
+
+                    <!-- Display Photo12 -->
+                {% if cow.photos12 %}
+                <div class="cow-photo12">
+                    <img src="{{ cow.photos12.url }}" alt="{{ cow.title }}">
+                </div>
+                {% endif %}
+
+
+                  <p class="description">Caring for cows requires providing a secure, comfortable, and healthy environment. 
+                    Ensure they have access to clean water, high-quality feed, and regular veterinary check-ups to prevent diseases. 
+                    Proper shelter should protect them from extreme weather conditions, and they should be kept in clean, 
+                    dry bedding to avoid infections. Handling should be gentle and calm, 
+                    as stress can negatively impact their health. Regular monitoring for signs of illness,
+                    ensuring safe fencing, and providing proper hoof care and vaccinations are also essential for 
+                    maintaining the well-being of your cows.</p>
+
+
+                        <!-- Display Video -->
+                        {% if cow.video %}
+                        <div class="cow-video">
+                            {% comment %} <h3>Video</h3> {% endcomment %}
+                            <video controls>
+                                <source src="{{ cow.video.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        {% endif %}
+
+                
+                <!-- Display Creation Date -->
+                <p class="created-at">Created at: {{ cow.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
