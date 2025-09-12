@@ -23,7 +23,24 @@ It connects farmers with consumers by providing a transparent and reliable platf
 ---
 
 ## 📸 Screenshots
-(Add screenshots of your homepage/cart/dashboard here)
+
+### 🏠 Home Page
+![Home](screenshots/home.jpeg)
+
+### 🛍️ Products Page
+![Products](screenshots/products.jpeg)
+
+### 🛒 Cart Page
+![Cart](screenshots/cart.png)
+
+### 💳 Checkout Page
+![Checkout](screenshots/checkout.jpeg)
+
+### 🛠️ Admin Dashboard
+![Admin](screenshots/admin.jpeg)
+
+### 📰 Blog Page
+![Blog](screenshots/blog.jpeg)
 
 ---
 
