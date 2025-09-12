@@ -31,7 +31,7 @@ It connects farmers with consumers by providing a transparent and reliable platf
 ![Products](screenshots/products.jpeg)
 
 ### 🛒 Cart Page
-![Cart](screenshots/cart.png)
+![Cart](screenshots/cart.jpeg)
 
 ### 💳 Checkout Page
 ![Checkout](screenshots/checkout.jpeg)
