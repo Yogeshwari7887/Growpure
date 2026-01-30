@@ -1,0 +1,52 @@
+
+
+
+
+/*-----------------------------------*\
+  #BLOG
+\*-----------------------------------*/
+
+.blog { padding-block-start: 0; }
+
+.blog .section-title { margin-block-end: 40px; }
+
+.blog-list {
+  display: grid;
+  gap: 30px;
+}
+
+.blog-card :is(.card-banner, .card-content) { padding: 30px; }
+
+.blog-card .card-banner { background-color: var(--mint-cream); }
+
+.blog-card .card-content { border: 2px solid var(--mint-cream); }
+
+.blog-card .card-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-card .wrapper-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--fs-7);
+  color: var(--battleship-gray);
+}
+
+.blog-card .wrapper-item ion-icon {
+  color: var(--emerald);
+  font-size: 1.5rem;
+}
+
+.blog-card .card-title {
+  margin-block: 20px 30px;
+  font-family: var(--ff-roboto);
+  color: var(--russian-violet);
+}
+
+.blog-card .card-title a { transition: var(--transition-2); }
+
+.blog-card .card-title a:is(:hover, :focus) { color: var(--emerald); }
+
+

@@ -1,0 +1,246 @@
+/* -------------- Unique Footer Styling -------------- */
+.gp-footer {
+    background: #121212; /* Dark Elegant Background */
+    color: #EAEAEA; /* Soft White Text */
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Glow Effect */
+.gp-footer::before {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(74,144,226,0.5) 0%, rgba(18,18,18,0) 70%);
+    top: -50px;
+    left: 20%;
+    filter: blur(50px);
+}
+
+/* Footer Top Section */
+.gp-footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding-bottom: 40px;
+}
+
+/* Footer Columns */
+.gp-footer-column {
+    flex: 1;
+    min-width: 250px;
+    margin: 20px;
+}
+
+.gp-footer-column h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFD700; /* Gold */
+    margin-bottom: 15px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gp-footer-column h4::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #4A90E2; /* Electric Blue */
+    margin-top: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+/* Footer Links */
+.gp-footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.gp-footer-column ul li {
+    margin: 12px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gp-footer-column ul li:hover {
+    transform: translateX(6px);
+}
+
+.gp-footer-column ul li a {
+    color: #B0B0B0; /* Light Grey */
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+.gp-footer-column ul li a:hover {
+    color: #4A90E2; /* Electric Blue */
+}
+
+/* Social Media Icons */
+.gp-social-icons {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.gp-social-icons a {
+    color: #B0B0B0;
+    font-size: 22px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.gp-social-icons a:hover {
+    color: #FFD700; /* Gold */
+    transform: scale(1.2);
+}
+
+/* Contact Info */
+.gp-contact-info li {
+    margin: 8px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gp-contact-info li:hover {
+    transform: translateX(6px);
+}
+
+.gp-contact-info li i {
+    margin-right: 10px;
+    color: #4A90E2; /* Electric Blue */
+    font-size: 18px;
+}
+
+/* Newsletter Section */
+.gp-footer-newsletter {
+    text-align: center;
+    margin: 40px 0;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.gp-footer-newsletter h4 {
+    font-size: 22px;
+    color: #FFD700;
+}
+
+.gp-footer-newsletter p {
+    font-size: 16px;
+    color: #B0B0B0;
+    margin-bottom: 15px;
+}
+
+.gp-newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gp-newsletter-form input {
+    width: 50%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #4A90E2;
+    background: #1C1C1C;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.gp-newsletter-form input:focus {
+    border-color: #FFD700;
+}
+
+.gp-newsletter-form button {
+    padding: 12px 20px;
+    border: none;
+    background: #4A90E2;
+    color: #121212;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-left: 10px;
+}
+
+.gp-newsletter-form button:hover {
+    background: #FFD700;
+    color: #121212;
+}
+
+/* Footer Bottom Section */
+.gp-footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gp-footer-bottom p {
+    font-size: 14px;
+    color: #B0B0B0;
+}
+
+.gp-legal-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.gp-legal-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.gp-legal-links li a {
+    color: #B0B0B0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+}
+
+.gp-legal-links li a:hover {
+    color: #FFD700;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .gp-footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gp-newsletter-form {
+        flex-direction: column;
+    }
+
+    .gp-newsletter-form input {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .gp-newsletter-form button {
+        margin-left: 0;
+        width: 50%;
+    }
+}
