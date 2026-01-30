@@ -92,7 +92,6 @@ psutil==7.0.0
 psycopg2==2.9.10
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
-PyAudio @ file:///C:/Users/91738/Downloads/PyAudio-0.2.14-cp313-cp313-win_amd64.whl#sha256=692d8c1446f52ed2662120bcd9ddcb5aa2b71f38bda31e58b19fb4672fffba69
 pycparser==2.22
 Pygments==2.19.2
 pyjokes==0.8.3
