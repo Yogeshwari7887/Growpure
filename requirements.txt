@@ -1,22 +1,7 @@
-
+Django==5.0.6
 gunicorn
+whitenoise
 dj-database-url
 psycopg2-binary
 python-decouple
-
-# Django Core
-Django==5.0.6
-
-# Image Processing
 Pillow==10.3.0
-
-# Database (optional, for PostgreSQL/MySQL in production)
-# psycopg2-binary==2.9.9  # Uncomment for PostgreSQL
-# mysqlclient==2.2.4      # Uncomment for MySQL
-
-# Python Standard Library Enhancements
-python-dateutil==2.9.0
-
-# Additional utilities that might be helpful
-python-decouple==3.8  # For managing environment variables (recommended)
-whitenoise==6.6.0     # For serving static files in production
