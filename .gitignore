@@ -1,0 +1,23 @@
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Django environment and databases
+db.sqlite3
+.env
+
+# Media and collected static files
+staticfiles/
+media/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# OS/IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log

@@ -334,22 +334,25 @@ def edit_account(request):
 
     return render(request, 'admin_panel/user_dashboard.html')
 
-def user_orders(request):
-    orders = Order.objects.filter(user=request.user)
-    
-    for order in orders:
-        order_items = []
-        for item in order.order_items.all():  # Ensure you have a related field for order items
-            order_items.append({
-                "name": item.product.title,  # Adjust field names as per your model
-                "quantity": item.quantity,
-                "price": item.product.price
-            })
-        
-        # Convert the list to a JSON string for embedding in HTML
-        order.items_json = json.dumps(order_items)
-
-    return render(request, 'user_dashboard.html', {'orders': orders})
+# def user_orders(request):
+#     # NOTE: This function is unused and invalid because:
+#     # 1. The Order model does not have a 'user' field (queries are made via 'email').
+#     # 2. 'order_items' is a JSONField, not a database relation, so order.order_items.all() would fail.
+#     orders = Order.objects.filter(user=request.user)
+#     
+#     for order in orders:
+#         order_items = []
+#         for item in order.order_items.all():  
+#             order_items.append({
+#                 "name": item.product.title,  
+#                 "quantity": item.quantity,
+#                 "price": item.product.price
+#             })
+#         
+#         # Convert the list to a JSON string for embedding in HTML
+#         order.items_json = json.dumps(order_items)
+# 
+#     return render(request, 'user_dashboard.html', {'orders': orders})
 
 #=====================================================================================
 
