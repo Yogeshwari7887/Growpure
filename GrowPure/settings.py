@@ -28,11 +28,25 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-%!0&*qs&bd=8ma
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 # ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS')
+
 if allowed_hosts_env:
-    ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',')]
+    for host in allowed_hosts_env.split(','):
+        host = host.strip()
+        if host.startswith('https://'):
+            host = host[8:]
+        elif host.startswith('http://'):
+            host = host[7:]
+        host = host.split('/')[0]
+        ALLOWED_HOSTS.append(host)
 else:
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS.append('*')
+
+# Automatically permit Render domains when running in the Render environment
+if 'RENDER' in os.environ:
+    ALLOWED_HOSTS.append('.onrender.com')
+
 
 
 # Application definition
